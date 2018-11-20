@@ -24,7 +24,6 @@ class App extends Component {
     clickHandler = () => {
         for (var i = 0; i < this.state.products.length; i++) {
             console.log("DISPLAYING IN CLICKHANDLER UPC", this.state.products[i].upc);
-            console.log("DISPLAYING IN CLICKHANDLER QUERY", parseInt(this.state.query));
             if (this.state.products[i].upc === parseInt(this.state.query)) {
                 return this.setState({displayResult : this.state.products[i]});
             }

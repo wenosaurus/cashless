@@ -16,9 +16,16 @@ class Product extends React.Component {
         if (this.props.displayResult === null) {
             displayResultProduct = "Ready";
         } else if (this.props.displayResult === "N/A") {
-            displayResultProduct = "N/A";
+            displayResultProduct = this.props.displayResult;
         } else {
-            displayResultProduct = this.props.displayResult.name;
+            displayResultProduct = (
+                <ul>
+                <li>{this.props.displayResult.name}</li>
+                <li>{this.props.displayResult.brand}</li>
+                <li>{this.props.displayResult.category}</li>
+                <li>{this.props.displayResult.price}</li>
+                </ul>
+                )
         }
 
         console.log("DISPLAYING RESULT IN PRODUCT APP", this.props.displayResult);
