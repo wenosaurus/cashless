@@ -11,9 +11,21 @@ class Product extends React.Component {
         //         )
         //     });
 
+        var displayResultProduct;
+
+        if (this.props.displayResult === null) {
+            displayResultProduct = "Ready";
+        } else if (this.props.displayResult === "N/A") {
+            displayResultProduct = "N/A";
+        } else {
+            displayResultProduct = this.props.displayResult.name;
+        }
+
+        console.log("DISPLAYING RESULT IN PRODUCT APP", this.props.displayResult);
+
         return (
             <div>
-            {this.props.displayResult && this.props.displayResult.name}
+            {displayResultProduct}
             </div>
         )
     }

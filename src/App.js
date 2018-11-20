@@ -12,7 +12,6 @@ class App extends Component {
             query: '',
             products: [{name: "Classic Clean Shampoo", brand: "Pantene", category: "Shampoo", price: 5.00, upc: 100001}, {name: "Pure Baking Soda", brand: "Arm & Hammer", category: "Grocery", price: 1.00, upc: 100002}],
             displayResult: null,
-            selectedProduct: null,
             cart: []
         };
     }
@@ -23,15 +22,18 @@ class App extends Component {
     }
 
     clickHandler = () => {
-        for (var i=0; i < this.state.products.length; i++) {
+        for (var i = 0; i < this.state.products.length; i++) {
+            console.log("DISPLAYING IN CLICKHANDLER UPC", this.state.products[i].upc);
+            console.log("DISPLAYING IN CLICKHANDLER QUERY", parseInt(this.state.query));
             if (this.state.products[i].upc === parseInt(this.state.query)) {
                 return this.setState({displayResult : this.state.products[i]});
-            } else
-            return this.setState({displayResult : "Not Available"});
+            }
         }
+        this.setState({displayResult : "N/A"});
     }
 
     render() {
+        console.log("DISPLAYING RESULT IN RENDER APP", this.state.displayResult);
         return (
             <div>
             <Search selectClick={this.displayProduct} onClick={this.clickHandler} products={this.state.products} onChange={this.changeHandler} />
