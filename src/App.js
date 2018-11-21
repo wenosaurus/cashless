@@ -11,7 +11,7 @@ class App extends Component {
         super();
         this.state = {
             query: '',
-            products: [{ name: "Classic Clean Shampoo", brand: "Pantene", category: "Shampoo", price: 5.00, upc: 100001 }, { name: "Pure Baking Soda", brand: "Arm & Hammer", category: "Grocery", price: 1.00, upc: 100002 }],
+            products: [{ name: "Classic Clean Shampoo", brand: "Pantene", category: "Shampoo", price: 5.99, upc: 100001 }, { name: "Pure Baking Soda", brand: "Arm & Hammer", category: "Grocery", price: 1.20, upc: 100002 }],
             displayResult: null,
             cart: []
         };
@@ -19,12 +19,10 @@ class App extends Component {
 
     changeHandler = (event) => {
         this.setState({ query: event.target.value });
-        console.log("THIS CHANGE", this.state.query)
     }
 
     clickHandler = () => {
         for (var i = 0; i < this.state.products.length; i++) {
-            console.log("DISPLAYING IN CLICKHANDLER UPC", this.state.products[i].upc);
             if (this.state.products[i].upc === parseInt(this.state.query)) {
                 return this.setState({ displayResult: this.state.products[i] });
             }
@@ -33,41 +31,61 @@ class App extends Component {
     }
 
     addToCart = () => {
-        let cart = this.state.cart;
+        let {subtotal, total, cart} = this.state;
         let displayResult = this.state.displayResult;
-        let itemIndex = cart.findIndex( item => item.upc === displayResult.upc);
-        if (itemIndex === -1) {
+        let index = cart.findIndex(item => item.upc === displayResult.upc);
+        if (index === -1) {
             this.state.displayResult.count = 1;
-            this.setState({cart : [this.state.displayResult, ...cart]});
+            this.setState({ cart: [this.state.displayResult, ...cart] });
         } else {
-            cart[itemIndex].count += 1;
+            cart[index].count += 1;
             this.setState({ cart: cart });
         }
-        // cart.unshift(this.state.displayResult);
     };
 
     removeFromCart = (index) => {
         this.setState(({ cart }) => {
             if (cart[index].count === 1) {
                 cart.splice(index, 1);
-                console.log("REMOVE FROM CART IF");
             } else {
                 cart[index].count--;
-                console.log("REMOVE FROM CART ELSE");
             }
             return { cart };
         });
     };
 
     render() {
-        console.log("DISPLAYING RESULT IN RENDER APP", this.state.displayResult);
         return (
-            <div>
-            <Search selectClick={this.displayProduct} onClick={this.clickHandler} products={this.state.products} onChange={this.changeHandler} />
-
-            <Product displayResult={this.state.displayResult} addToCart={this.addToCart} />
-
-            <Cart displayCart={this.state.cart} removeFromCart={this.removeFromCart} />
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm-12" align="center">
+                         <img src="./images/logo.png" / >
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-sm-4">
+                        <Search
+                            selectClick={this.displayProduct}
+                            onClick={this.clickHandler}
+                            products={this.state.products}
+                            onChange={this.changeHandler}
+                        />
+                    </div>
+                    <div className="col-sm-4">
+                        <Product
+                            displayResult={this.state.displayResult}
+                            addToCart={this.addToCart}
+                        />
+                    </div>
+                    <div className="col-sm-4">
+                        <Cart
+                            displayCart={this.state.cart}
+                            removeFromCart={this.removeFromCart}
+                            gst={this.state.gst}
+                            total={this.state.total}
+                        />
+                    </div>
+                </div>
             </div>
         );
     }
