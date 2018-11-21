@@ -24,11 +24,12 @@ class Product extends React.Component {
                 <li>{this.props.displayResult.brand}</li>
                 <li>{this.props.displayResult.category}</li>
                 <li>{this.props.displayResult.price}</li>
+                <button onClick={this.props.addToCart}>Add to Cart</button>
                 </ul>
                 )
-        }
+            }
 
-        console.log("DISPLAYING RESULT IN PRODUCT APP", this.props.displayResult);
+            console.log("DISPLAYING RESULT IN PRODUCT APP", this.props.displayResult);
 
         return (
             <div>
