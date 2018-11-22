@@ -10,7 +10,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            query: '',
+            query: window.location.pathname.substring(1),
             products: [{ name: "Classic Clean Shampoo", brand: "Pantene", category: "Shampoo", price: 5.99, upc: 100001 }, { name: "Pure Baking Soda", brand: "Arm & Hammer", category: "Grocery", price: 1.20, upc: 100002 }],
             displayResult: null,
             cart: []
@@ -55,6 +55,7 @@ class App extends Component {
     };
 
     render() {
+        console.log("PATHNAME", this.state.pathName);
         return (
             <div className="container">
                 <div className="row">
@@ -65,6 +66,7 @@ class App extends Component {
                 <div className="row">
                     <div className="col-sm-4">
                         <Search
+                            query={this.state.query}
                             selectClick={this.displayProduct}
                             onClick={this.clickHandler}
                             products={this.state.products}

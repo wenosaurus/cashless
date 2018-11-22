@@ -6,7 +6,7 @@ class Search extends React.Component {
     render() {
         return (
             <div>
-            <input onChange={this.props.onChange} />
+            <input value={this.props.query} onChange={this.props.onChange} />
             <button onClick={this.props.onClick}>Search</button>
             </div>
         )
