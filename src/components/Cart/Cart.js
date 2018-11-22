@@ -28,7 +28,7 @@ class Cart extends React.Component {
                     <td>{item.name}</td>
                     <td>{item.count}</td>
                     <td>${(item.price * item.count).toFixed(2)}</td>
-                    <td><i className="far fa-trash-alt" onClick={() => {this.props.removeFromCart(index)}} /></td>
+                    <td><i className="far fa-trash-alt" onClick={() => {this.props.removeFromCart(index)}}></i> <i className="fas fa-cart-plus" onClick={() => {this.props.addFromCart(index)}}></i></td>
                     </tr>
                     )
             })
@@ -43,7 +43,7 @@ class Cart extends React.Component {
                 <tr>
                 <td></td>
                 <td></td>
-                <td>GST</td>
+                <td>Tax</td>
                 <td>${(subtotal * gst).toFixed(2)}</td>
                 </tr>
                 <tr>

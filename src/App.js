@@ -62,7 +62,7 @@ class App extends Component {
             this.setState({ cart: cart });
             localStorage.setItem("shoppingCart", JSON.stringify([...cart]));
         }
-    };
+    }
 
     removeFromCart = (index) => {
         this.setState(({ cart }) => {
@@ -75,17 +75,17 @@ class App extends Component {
             }
             return { cart };
         });
-    };
+    }
 
     addFromCart = (index) => {
         this.setState(({ cart }) => {
             if (cart[index].count >= 1) {
-                cart.[index].count++);
+                cart[index].count++;
                 localStorage.setItem("shoppingCart", JSON.stringify([...cart]));
             }
             return { cart };
         });
-    };
+    }
 
     render() {
         if (this.state.displayResult === null) {
@@ -121,9 +121,9 @@ class App extends Component {
                         <Cart
                             displayCart={this.state.cart}
                             removeFromCart={this.removeFromCart}
+                            addFromCart={this.addFromCart}
                             gst={this.state.gst}
                             total={this.state.total}
-                            payPal={this.state.pay}
                         />
                     </div>
                 </div>

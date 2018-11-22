@@ -14,6 +14,10 @@ code {
     monospace;
 }
 
+i {
+	font-size: medium;
+}
+
 i:hover {
 	color: red;
 }
@@ -21,6 +25,7 @@ i:hover {
 .logo {
 	margin: 20px;
 	padding: 20px;
+	width: 225px;
 }
 
 .box {
@@ -32,4 +37,20 @@ i:hover {
 
 .searchBox {
 	margin: 10px 0 20px 0;
+}
+
+.table {
+    font-size: x-small;
+}
+
+@media only screen and (min-width: 600px) {
+  .table {
+    font-size: unset;
+  }
+  .logo {
+  	width: 303px;
+  }
+  .form-control {
+  	width: 450px;
+  }
 }
