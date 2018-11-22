@@ -4,6 +4,8 @@ class Cart extends React.Component {
     render() {
 
         const array = this.props.displayCart;
+        const loadCart = JSON.parse(localStorage.getItem("shoppingCart"));
+        console.log("LOAD CART", loadCart);
         let displayShoppingCart;
         let displayTotal;
 
