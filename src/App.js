@@ -31,15 +31,17 @@ class App extends Component {
     }
 
     addToCart = () => {
-        let {subtotal, total, cart} = this.state;
+        let cart = this.state.cart;
         let displayResult = this.state.displayResult;
         let index = cart.findIndex(item => item.upc === displayResult.upc);
         if (index === -1) {
             this.state.displayResult.count = 1;
             this.setState({ cart: [this.state.displayResult, ...cart] });
+            localStorage.setItem("shoppingCart", JSON.stringify([this.state.displayResult, ...cart]));
         } else {
             cart[index].count += 1;
             this.setState({ cart: cart });
+            localStorage.setItem("shoppingCart", JSON.stringify([...cart]));
         }
     };
 
@@ -47,15 +49,16 @@ class App extends Component {
         this.setState(({ cart }) => {
             if (cart[index].count === 1) {
                 cart.splice(index, 1);
+                localStorage.setItem("shoppingCart", JSON.stringify([...cart]));
             } else {
                 cart[index].count--;
+                localStorage.setItem("shoppingCart", JSON.stringify([...cart]));
             }
             return { cart };
         });
     };
 
     render() {
-        console.log("PATHNAME", this.state.pathName);
         return (
             <div className="container">
                 <div className="row">
