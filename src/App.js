@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import data from './data/Data.js';
 
 import Search from './components/Search/Search';
 import Product from './components/Product/Product';
@@ -11,7 +12,7 @@ class App extends Component {
         super();
         this.state = {
             query: window.location.pathname.substring(1),
-            products: [{ name: "Classic Clean Shampoo", brand: "Pantene", category: "Shampoo", price: 5.99, upc: 100001 }, { name: "Pure Baking Soda", brand: "Arm & Hammer", category: "Grocery", price: 1.20, upc: 100002 }],
+            products: data,
             displayResult: null,
             cart: []
         };
@@ -19,6 +20,11 @@ class App extends Component {
 
     changeHandler = (event) => {
         this.setState({ query: event.target.value });
+    }
+
+    componentDidMount() {
+        const loadCart = JSON.parse(localStorage.getItem("shoppingCart"));
+        this.setState({cart : loadCart});
     }
 
     clickHandler = () => {
@@ -67,29 +73,23 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-sm-4">
-                        <Search
-                            query={this.state.query}
-                            selectClick={this.displayProduct}
-                            onClick={this.clickHandler}
-                            products={this.state.products}
-                            onChange={this.changeHandler}
-                        />
-                    </div>
-                    <div className="col-sm-4">
-                        <Product
-                            displayResult={this.state.displayResult}
-                            addToCart={this.addToCart}
-                        />
-                    </div>
-                    <div className="col-sm-4">
-                        <Cart
-                            displayCart={this.state.cart}
-                            removeFromCart={this.removeFromCart}
-                            gst={this.state.gst}
-                            total={this.state.total}
-                        />
-                    </div>
+                    <Search
+                        query={this.state.query}
+                        selectClick={this.displayProduct}
+                        onClick={this.clickHandler}
+                        products={this.state.products}
+                        onChange={this.changeHandler}
+                    />
+                    <Product
+                        displayResult={this.state.displayResult}
+                        addToCart={this.addToCart}
+                    />
+                    <Cart
+                        displayCart={this.state.cart}
+                        removeFromCart={this.removeFromCart}
+                        gst={this.state.gst}
+                        total={this.state.total}
+                    />
                 </div>
             </div>
         );

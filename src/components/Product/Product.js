@@ -13,16 +13,17 @@ class Product extends React.Component {
             displayResultProduct = (
                 <ul>
                 <li>{this.props.displayResult.name}</li>
+                <li>{this.props.displayResult.price}</li>
                 <li>{this.props.displayResult.brand}</li>
                 <li>{this.props.displayResult.category}</li>
-                <li>{this.props.displayResult.price}</li>
+                <li>{this.props.displayResult.description}</li>
                 <button onClick={this.props.addToCart}>Add to Cart</button>
                 </ul>
                 )
             }
 
         return (
-            <div>
+            <div className="col-sm-4">
             {displayResultProduct}
             </div>
         )

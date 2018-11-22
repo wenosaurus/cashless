@@ -9,7 +9,7 @@ class Cart extends React.Component {
         let displayShoppingCart;
         let displayTotal;
 
-        if (array.length < 1) {
+        if (loadCart === null || loadCart.length < 1) {
             displayShoppingCart = (
                 <tr><td colspan="4">
                 Your shopping cart is empty.
@@ -18,10 +18,10 @@ class Cart extends React.Component {
         } else {
             let subtotal = 0;
             let gst = 0.07;
-            for (var i = 0; i < array.length; i++) {
-                subtotal += array[i].price * array[i].count
+            for (var i = 0; i < loadCart.length; i++) {
+                subtotal += loadCart[i].price * loadCart[i].count
             };
-            displayShoppingCart = array.map((item, index) => {
+            displayShoppingCart = loadCart.map((item, index) => {
                 return (
                     <tr>
                     <td>{item.name}</td>
@@ -56,7 +56,7 @@ class Cart extends React.Component {
         }
 
         return (
-            <div>
+            <div className="col-sm-4">
                 <table class="table">
                     <thead>
                         <tr>
