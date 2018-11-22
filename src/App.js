@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import data from './data/Data.js';
 
@@ -24,10 +24,23 @@ class App extends Component {
 
     componentDidMount() {
         const loadCart = JSON.parse(localStorage.getItem("shoppingCart"));
-        this.setState({cart : loadCart});
+        if (loadCart === null) {
+            this.setState({cart : []});
+        } else {
+            this.setState({cart : loadCart});
+        }
     }
 
     clickHandler = () => {
+        for (var i = 0; i < this.state.products.length; i++) {
+            if (this.state.products[i].upc === parseInt(this.state.query)) {
+                return this.setState({ displayResult: this.state.products[i] });
+            }
+        }
+        this.setState({ displayResult: "N/A" });
+    }
+
+    qrScan = () => {
         for (var i = 0; i < this.state.products.length; i++) {
             if (this.state.products[i].upc === parseInt(this.state.query)) {
                 return this.setState({ displayResult: this.state.products[i] });
@@ -64,32 +77,55 @@ class App extends Component {
         });
     };
 
+    addFromCart = (index) => {
+        this.setState(({ cart }) => {
+            if (cart[index].count >= 1) {
+                cart.[index].count++);
+                localStorage.setItem("shoppingCart", JSON.stringify([...cart]));
+            }
+            return { cart };
+        });
+    };
+
     render() {
+        if (this.state.displayResult === null) {
+            this.qrScan();
+        };
+
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-sm-12" align="center">
-                         <img src="./images/logo.png" / >
+                    <div className="col-md-12" align="center">
+                         <img src="./images/logo.png" className="logo" alt="logo" / >
                     </div>
                 </div>
                 <div className="row">
-                    <Search
-                        query={this.state.query}
-                        selectClick={this.displayProduct}
-                        onClick={this.clickHandler}
-                        products={this.state.products}
-                        onChange={this.changeHandler}
-                    />
-                    <Product
-                        displayResult={this.state.displayResult}
-                        addToCart={this.addToCart}
-                    />
-                    <Cart
-                        displayCart={this.state.cart}
-                        removeFromCart={this.removeFromCart}
-                        gst={this.state.gst}
-                        total={this.state.total}
-                    />
+                    <div className="col-md-12" align="center">
+                        <Search
+                            query={this.state.query}
+                            selectClick={this.displayProduct}
+                            onClick={this.clickHandler}
+                            products={this.state.products}
+                            onChange={this.changeHandler}
+                        />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-4">
+                        <Product
+                            displayResult={this.state.displayResult}
+                            addToCart={this.addToCart}
+                        />
+                    </div>
+                    <div className="col-md-8">
+                        <Cart
+                            displayCart={this.state.cart}
+                            removeFromCart={this.removeFromCart}
+                            gst={this.state.gst}
+                            total={this.state.total}
+                            payPal={this.state.pay}
+                        />
+                    </div>
                 </div>
             </div>
         );

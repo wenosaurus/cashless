@@ -11,19 +11,42 @@ class Product extends React.Component {
             displayResultProduct = this.props.displayResult;
         } else {
             displayResultProduct = (
-                <ul>
-                <li>{this.props.displayResult.name}</li>
-                <li>{this.props.displayResult.price}</li>
-                <li>{this.props.displayResult.brand}</li>
-                <li>{this.props.displayResult.category}</li>
-                <li>{this.props.displayResult.description}</li>
-                <button onClick={this.props.addToCart}>Add to Cart</button>
-                </ul>
+                <table>
+                <tbody>
+                <tr>
+                <td colSpan="2" align="center">
+                <img src={this.props.displayResult.image} alt={this.props.displayResult.name} /></td>
+                </tr>
+                <tr>
+                <td colSpan="2" align="center">
+                <h3>{this.props.displayResult.name}</h3></td>
+                </tr>
+                <tr>
+                <td>Price</td>
+                <td>${this.props.displayResult.price}</td>
+                </tr>
+                <tr>
+                <td>Brand</td>
+                <td>{this.props.displayResult.brand}</td>
+                </tr>
+                <tr>
+                <td>Category</td>
+                <td>{this.props.displayResult.category}</td>
+                </tr>
+                <tr>
+                <td colSpan="2"><strong>Description</strong><br />
+                {this.props.displayResult.description}</td>
+                </tr>
+                <tr>
+                <td colSpan="2" align="center"><button onClick={this.props.addToCart} className="btn btn-secondary">Add to Cart <i class="fas fa-cart-plus"></i></button></td>
+                </tr>
+                </tbody>
+                </table>
                 )
             }
 
         return (
-            <div className="col-sm-4">
+            <div className="box">
             {displayResultProduct}
             </div>
         )

@@ -6,9 +6,30 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #5BAEAA;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+i:hover {
+	color: red;
+}
+
+.logo {
+	margin: 20px;
+	padding: 20px;
+}
+
+.box {
+	background-color: #FFFFFF;
+	margin: 10px 0 10px 0;
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.searchBox {
+	margin: 10px 0 20px 0;
 }

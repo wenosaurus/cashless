@@ -1,17 +1,18 @@
 import React from 'react';
 
 class Cart extends React.Component {
-    render() {
 
-        const array = this.props.displayCart;
+    render() {
+        // const array = this.props.displayCart;
         const loadCart = JSON.parse(localStorage.getItem("shoppingCart"));
         console.log("LOAD CART", loadCart);
         let displayShoppingCart;
         let displayTotal;
+        let displayCheckout;
 
         if (loadCart === null || loadCart.length < 1) {
             displayShoppingCart = (
-                <tr><td colspan="4">
+                <tr><td colSpan="4">
                 Your shopping cart is empty.
                 </td></tr>
                 )
@@ -26,8 +27,8 @@ class Cart extends React.Component {
                     <tr>
                     <td>{item.name}</td>
                     <td>{item.count}</td>
-                    <td>{(item.price * item.count).toFixed(2)}</td>
-                    <td><button onClick={() => {this.props.removeFromCart(index)}}>Remove</button></td>
+                    <td>${(item.price * item.count).toFixed(2)}</td>
+                    <td><i className="far fa-trash-alt" onClick={() => {this.props.removeFromCart(index)}} /></td>
                     </tr>
                     )
             })
@@ -37,27 +38,32 @@ class Cart extends React.Component {
                 <td></td>
                 <td></td>
                 <td>Subtotal</td>
-                <td>{subtotal.toFixed(2)}</td>
+                <td>${subtotal.toFixed(2)}</td>
                 </tr>
                 <tr>
                 <td></td>
                 <td></td>
                 <td>GST</td>
-                <td>{(subtotal * gst).toFixed(2)}</td>
+                <td>${(subtotal * gst).toFixed(2)}</td>
                 </tr>
                 <tr>
                 <td></td>
                 <td></td>
                 <td>Total</td>
-                <td>{(subtotal + gst).toFixed(2)}</td>
+                <td>${(subtotal + gst).toFixed(2)}</td>
                 </tr>
                 </tbody>
             )
+            displayCheckout = (
+                <div id="paypal-button" align="center">
+                <button className="btn btn-success">Checkout <i class="far fa-credit-card"></i></button>
+                </div>
+                )
         }
 
         return (
-            <div className="col-sm-4">
-                <table class="table">
+            <div className="box">
+                <table className="table">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -69,6 +75,7 @@ class Cart extends React.Component {
                         {displayShoppingCart}
                         {displayTotal}
                 </table>
+                {displayCheckout}
             </div>
         )
     }
