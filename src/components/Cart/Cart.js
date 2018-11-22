@@ -4,47 +4,69 @@ class Cart extends React.Component {
     render() {
 
         const array = this.props.displayCart;
-        var displayShoppingCart;
+        let displayShoppingCart;
+        let displayTotal;
 
         if (array.length < 1) {
-            displayShoppingCart = "Your shopping cart is empty.";
+            displayShoppingCart = (
+                <tr><td colspan="4">
+                Your shopping cart is empty.
+                </td></tr>
+                )
         } else {
+            let subtotal = 0;
+            let gst = 0.07;
+            for (var i = 0; i < array.length; i++) {
+                subtotal += array[i].price * array[i].count
+            };
             displayShoppingCart = array.map((item, index) => {
                 return (
-                    <table>
-                    <th>
-                    <td>Name</td>
-                    <td>Quantity</td>
-                    <td>Cost</td>
-                    <td>Delete</td>
-                    </th>
                     <tr>
                     <td>{item.name}</td>
                     <td>{item.count}</td>
-                    <td>{item.price * item.count}</td>
+                    <td>{(item.price * item.count).toFixed(2)}</td>
                     <td><button onClick={() => {this.props.removeFromCart(index)}}>Remove</button></td>
                     </tr>
-                    <tr>
-                    <td></td>
-                    <td></td>
-                    <td>Subtotal</td>
-                    <td></td>
-                    </tr>
-                    </table>
                     )
             })
+            displayTotal = (
+                <tbody>
+                <tr>
+                <td></td>
+                <td></td>
+                <td>Subtotal</td>
+                <td>{subtotal.toFixed(2)}</td>
+                </tr>
+                <tr>
+                <td></td>
+                <td></td>
+                <td>GST</td>
+                <td>{(subtotal * gst).toFixed(2)}</td>
+                </tr>
+                <tr>
+                <td></td>
+                <td></td>
+                <td>Total</td>
+                <td>{(subtotal + gst).toFixed(2)}</td>
+                </tr>
+                </tbody>
+            )
         }
-
-        let subtotal = 0;
-
-        for (var i = 0; i < array.length; i++) {
-            subtotal += array[i].price * array[i].count
-        };
-        console.log(subtotal);
 
         return (
             <div>
-            {displayShoppingCart}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Cost</th>
+                            <th>Update</th>
+                        </tr>
+                    </thead>
+                        {displayShoppingCart}
+                        {displayTotal}
+                </table>
             </div>
         )
     }
