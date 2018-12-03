@@ -14,6 +14,12 @@ code {
     monospace;
 }
 
+footer {
+	color: white;
+	font-size: smaller;
+	margin: 20px 0 20px 0;
+}
+
 i {
 	font-size: medium;
 }

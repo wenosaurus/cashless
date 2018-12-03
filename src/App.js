@@ -25,9 +25,9 @@ class App extends Component {
     componentDidMount() {
         const loadCart = JSON.parse(localStorage.getItem("shoppingCart"));
         if (loadCart === null) {
-            this.setState({cart : []});
+            this.setState({ cart: [] });
         } else {
-            this.setState({cart : loadCart});
+            this.setState({ cart: loadCart });
         }
     }
 
@@ -137,6 +137,13 @@ class App extends Component {
                             total={this.state.total}
                             onSuccess={this.onSuccess}
                         />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-12" align="center">
+                        <footer>
+                            2018 Built with <i class="fas fa-heart"></i> <a href="http://www.wenvo.tech">wenvo.tech</a>
+                        </footer>
                     </div>
                 </div>
             </div>
