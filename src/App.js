@@ -87,6 +87,17 @@ class App extends Component {
         });
     }
 
+    onSuccess = (payment) => {
+        console.log("PAYMENT PAID", payment.paid);
+        if (payment.paid === true) {
+            window.alert('Thank you for your purchase!');
+            localStorage.clear();
+            window.location.reload();
+        } else {
+            window.alert('Payment did not go thru, please try again.');
+        }
+    }
+
     render() {
         if (this.state.displayResult === null) {
             this.qrScan();
@@ -124,6 +135,7 @@ class App extends Component {
                             addFromCart={this.addFromCart}
                             gst={this.state.gst}
                             total={this.state.total}
+                            onSuccess={this.onSuccess}
                         />
                     </div>
                 </div>

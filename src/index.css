@@ -18,8 +18,12 @@ i {
 	font-size: medium;
 }
 
-i:hover {
+.far:hover {
 	color: red;
+}
+
+.fas:hover {
+	color: green;
 }
 
 .logo {

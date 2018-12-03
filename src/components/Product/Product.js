@@ -7,7 +7,7 @@ class Product extends React.Component {
 
         if (this.props.displayResult === null) {
             displayResultProduct = "Ready";
-        } else if (this.props.displayResult === "N/A") {
+        } else if (this.props.displayResult === "N/A" || this.props.displayResult === "Thank You!") {
             displayResultProduct = this.props.displayResult;
         } else {
             displayResultProduct = (

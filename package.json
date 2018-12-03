@@ -6,6 +6,8 @@
     "jsonfile": "^5.0.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-paypal-express-checkout": "^1.0.5",
+    "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1"
   },
   "scripts": {
@@ -13,6 +15,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "engines": {
+    "node": "v11.1.0"
   },
   "eslintConfig": {
     "extends": "react-app"

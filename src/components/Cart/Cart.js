@@ -1,4 +1,5 @@
 import React from 'react';
+import PaypalExpressBtn from 'react-paypal-express-checkout';
 
 class Cart extends React.Component {
 
@@ -9,13 +10,17 @@ class Cart extends React.Component {
         let displayShoppingCart;
         let displayTotal;
         let displayCheckout;
+        const client = {
+            sandbox:    'AThFaFVRTNO8XtBZUZgABXtI6cvwPE3Iff7iQoWv8Jzxb-CtWzY37pX8cIO2Dd9H8os2r5mRJGGlSj8f',
+            production: 'YOUR-PRODUCTION-APP-ID',
+        }
 
         if (loadCart === null || loadCart.length < 1) {
             displayShoppingCart = (
                 <tr><td colSpan="4">
                 Your shopping cart is empty.
                 </td></tr>
-                )
+            )
         } else {
             let subtotal = 0;
             let gst = 0.07;
@@ -30,7 +35,7 @@ class Cart extends React.Component {
                     <td>${(item.price * item.count).toFixed(2)}</td>
                     <td><i className="far fa-trash-alt" onClick={() => {this.props.removeFromCart(index)}}></i> <i className="fas fa-cart-plus" onClick={() => {this.props.addFromCart(index)}}></i></td>
                     </tr>
-                    )
+                )
             })
             displayTotal = (
                 <tbody>
@@ -55,10 +60,10 @@ class Cart extends React.Component {
                 </tbody>
             )
             displayCheckout = (
-                <div id="paypal-button" align="center">
-                <button className="btn btn-success">Checkout <i class="far fa-credit-card"></i></button>
+                <div align="right">
+                <PaypalExpressBtn client={client} currency={'SGD'} total={(subtotal + gst).toFixed(2)} onSuccess={this.props.onSuccess} />
                 </div>
-                )
+            )
         }
 
         return (
